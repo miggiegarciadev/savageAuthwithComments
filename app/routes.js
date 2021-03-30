@@ -32,13 +32,17 @@ module.exports = function(app, passport, db) {
 // message board routes ===============================================================
 
     app.post('/messages', (req, res) => {
-      // the names here need to match the name="" in profile.ejs
+      // the names here need to match the name="" in profile.ejs forms
       db.collection('messages').save({name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/profile')
       })
     })
+  
+  //{<propertyName1> : <value1>, <propertyName2> : <value2>}
+  ""
+  
 // .put is the method type, /message = name of fetch, (req, res) is the callback functions
     app.put('/messages', (req, res) => {
 //       'messages' name of collection
@@ -48,6 +52,9 @@ module.exports = function(app, passport, db) {
       .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
         // this is not a filter. $set is a database method giving one instruction for 
         $set: {thumbUp:req.body.thumbUp + 1}
+        
+        // this causes duplicates if object not found (check your filter)
+        // upsert is a property name, sort a property name that is part of an object
       }, {sort: {_id: -1},upsert: true
       }, (err, result) => {
         if (err) return res.send(err)
