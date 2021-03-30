@@ -11,7 +11,9 @@ module.exports = function(app, passport, db) {
     });
 
     // PROFILE SECTION =========================
+  // isLoggedIn is a form of middleware 
     app.get('/profile', isLoggedIn, function(req, res) {
+      //finds and returns all the info from the database and toarray turns it into an arrary
         db.collection('messages').find().toArray((err, result) => {
           if (err) return console.log(err)
           res.render('profile.ejs', {
@@ -36,16 +38,14 @@ module.exports = function(app, passport, db) {
         res.redirect('/profile')
       })
     })
-
+// .put is the method type, /message = name of fetch, (req, res) is the callback functions
     app.put('/messages', (req, res) => {
+      
       db.collection('messages')
+      // everything between the first srt of {} is a filter 
       .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
-        $set: {
-          thumbUp:req.body.thumbUp + 1
-        }
-      }, {
-        sort: {_id: -1},
-        upsert: true
+        $set: {thumbUp:req.body.thumbUp + 1}
+      }, {sort: {_id: -1},upsert: true
       }, (err, result) => {
         if (err) return res.send(err)
         res.send(result)
