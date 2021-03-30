@@ -41,7 +41,7 @@ module.exports = function(app, passport, db) {
     })
   
   //{<propertyName1> : <value1>, <propertyName2> : <value2>}
-  ""
+  //{"Chance The Rapper": {realName: "Chancelor", birthday:"something"}, "Biggie":"..."
   
 // .put is the method type, /message = name of fetch, (req, res) is the callback functions
     app.put('/messages', (req, res) => {
@@ -55,15 +55,18 @@ module.exports = function(app, passport, db) {
         
         // this causes duplicates if object not found (check your filter)
         // upsert is a property name, sort a property name that is part of an object
-      }, {sort: {_id: -1},upsert: true
-      }, (err, result) => {
+        // sort is not an object
+      }, {sort: {_id: -1} ,upsert: true}, (err, result) => {
         if (err) return res.send(err)
         res.send(result)
       })
     })
-
+// delete is a methos type, /messages is neame of the fetch
     app.delete('/messages', (req, res) => {
+      // 'messages' is the name of the mongo db collection, everything between firt set of {} is a filter, (err, result) is a callback function
       db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
+        // error 500 is an internal server error
+        // like error 404 is a not found error
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
@@ -76,6 +79,7 @@ module.exports = function(app, passport, db) {
     // locally --------------------------------
         // LOGIN ===============================
         // show the login form
+    
         app.get('/login', function(req, res) {
             res.render('login.ejs', { message: req.flash('loginMessage') });
         });

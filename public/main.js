@@ -15,6 +15,7 @@ Array.from(thumbUp).forEach(function(element) {
             'thumbUp':thumbUp
           })
         })
+        // 18-21 interracts with .put from routes.js (line 61)
         .then(response => {
           if (response.ok) return response.json()
         })
@@ -38,7 +39,9 @@ Array.from(trash).forEach(function(element) {
             'name': name,
             'msg': msg
           })
+          // this response is being captured here from routes.js res.send
         }).then(function (response) {
+          
           window.location.reload()
         })
       });
