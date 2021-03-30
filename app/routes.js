@@ -1,4 +1,8 @@
-/// all actions that happen on the webpage are handled here (server.js allows this)
+/// all actions that happen on the webpage (between clients and server) are handled here (server.js allows this)
+/// has 4 main CRUD functions
+// for .get you're using ejs files to make html files 
+/// ejs is a templating language because it's the template for html
+
 
 
 //instructions that tell node.js which bits of code to export from a given file so that other files can have access
