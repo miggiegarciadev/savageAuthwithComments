@@ -1,9 +1,10 @@
 // server.js
 
 // set up ======================================================================
-// get all the tools we need
+// get all the tools / modules / extensions we need
 var express  = require('express');
 var app      = express();
+//
 var port     = process.env.PORT || 8080;
 const MongoClient = require('mongodb').MongoClient
 var mongoose = require('mongoose');
@@ -23,6 +24,7 @@ var db
 mongoose.connect(configDB.url, (err, database) => {
   if (err) return console.log(err)
   db = database
+  // taking these variables below and sending to routes.js to be captured in that order 
   require('./app/routes.js')(app, passport, db);
 }); // connect to our database
 

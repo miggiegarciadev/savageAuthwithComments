@@ -35,7 +35,7 @@ var userSchema = mongoose.Schema({
 });
 
 // generating a hash for password (hashing means the password become encrypted for security purposes)
-userSchema.methods.generateHash = function(password) {//password is the password 
+userSchema.methods.generateHash = function(password) {//password is the password the user typed in
   // hashSync is a method of bcrype module, genSeltSyns is a callback function of hashSync
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };

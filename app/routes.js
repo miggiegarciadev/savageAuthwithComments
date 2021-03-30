@@ -1,9 +1,12 @@
+//instructions that tell node.js which bits of code to export from a given file so that other files can have access
 module.exports = function(app, passport, db) {
 
 // normal routes ===============================================================
 
     // show the home page (will also have our login links)
+  //Remember / means 'root' and usually renders index.html
     app.get('/', function(req, res) {
+      // .render method loads the page between ()
         res.render('index.ejs');
     });
 
