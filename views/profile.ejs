@@ -51,6 +51,7 @@
           </ul>
 
           <h2>Add a message</h2>
+          // corresponds to 
         <% if (user.local.email) { %>
           <form action="/messages" method="POST">
             <input type="text" value="<%= user.local.email %>" name="name">

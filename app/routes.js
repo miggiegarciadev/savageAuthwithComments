@@ -1,3 +1,6 @@
+/// all actions that happen on the webpage are handled here (server.js allows this)
+
+
 //instructions that tell node.js which bits of code to export from a given file so that other files can have access
 module.exports = function(app, passport, db) {
 
@@ -79,7 +82,7 @@ module.exports = function(app, passport, db) {
     // locally --------------------------------
         // LOGIN ===============================
         // show the login form
-    
+      //'/login' corresponds to line 18 on index.ejs
         app.get('/login', function(req, res) {
             res.render('login.ejs', { message: req.flash('loginMessage') });
         });
