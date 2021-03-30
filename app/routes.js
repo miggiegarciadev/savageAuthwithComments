@@ -32,6 +32,7 @@ module.exports = function(app, passport, db) {
 // message board routes ===============================================================
 
     app.post('/messages', (req, res) => {
+      // the names here need to match the name="" in profile.ejs
       db.collection('messages').save({name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
@@ -40,10 +41,12 @@ module.exports = function(app, passport, db) {
     })
 // .put is the method type, /message = name of fetch, (req, res) is the callback functions
     app.put('/messages', (req, res) => {
+//       'messages' name of collection
       
       db.collection('messages')
-      // everything between the first srt of {} is a filter 
+      // everything between the first srt of {} is a filter - if there's no filter, the method will find first object
       .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
+        // this is not a filter. $set is a database method giving one instruction for 
         $set: {thumbUp:req.body.thumbUp + 1}
       }, {sort: {_id: -1},upsert: true
       }, (err, result) => {
