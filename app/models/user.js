@@ -8,7 +8,8 @@ var bcrypt   = require('bcrypt-nodejs');
 // define the schema for our user model
 // schema - outlines how your database info is presented
 var userSchema = mongoose.Schema({
-
+// a nested document (a document inside of a document)
+// https://mongoosejs.com/docs/schematypes.html#maps
     local            : {
         email        : String,
         password     : String
